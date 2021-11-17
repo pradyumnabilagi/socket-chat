@@ -5,10 +5,10 @@ please use Visual studio dev tools for compiling the cpp files. The server code 
 Note: This code only works on windows platform
 
 ## Server
-Server code is present inside server code.
+Server code is present inside server folder.
 Please compile using visual studio dev console ,use "cl /EHsc main.cpp"
 
 
 ## Client
-client code is present in the root
+Client code is present in the root
 Please compile using visual studio dev console ,use "cl /EHsc client.cpp"
