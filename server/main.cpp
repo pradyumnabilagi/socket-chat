@@ -271,7 +271,7 @@ int main()
     std::vector<std::future<void>> receivers, senders;
     std::future<Client>* newProcess;
     std::future_status status, status1, status2;
-    Client s;
+    Client newConn;
     int count = 0;
     while (true)
     {
@@ -283,7 +283,7 @@ int main()
             status = newProcess->wait_for(std::chrono::milliseconds(100));
             if (status == std::future_status::ready)
             {
-                s = newProcess->get();
+                newConn = newProcess->get();
                 break;
             }
             else
@@ -317,13 +317,13 @@ int main()
             break;
         }
         delete newProcess;
-        if(s.size!=-1)
+        if(newConn.size!=-1)
         {
-            std::cout << "new client " << s.Host << " port " << s.Service << std::endl;
+            std::cout << "new client " << newConn.Host << " port " << newConn.Service << std::endl;
             receivers.push_back(std::future<void>());
             senders.push_back(std::future<void>());
-            receivers[receivers.size() - 1] = std::async(std::launch::async, Reciver, s);
-            senders[senders.size() - 1] = std::async(std::launch::async, Sender, s);
+            receivers[receivers.size() - 1] = std::async(std::launch::async, Reciver, newConn);
+            senders[senders.size() - 1] = std::async(std::launch::async, Sender, newConn);
         }
         
 
